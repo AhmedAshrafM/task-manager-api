@@ -1,7 +1,9 @@
-import { Elysia } from "elysia";
+import 'dotenv/config'
+import App from '../app'
+import { controllers } from './utils/controllersIntantiator'
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const app = new App(controllers, Number(process.env.PORT))
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+app.listen()
+
+export default app
