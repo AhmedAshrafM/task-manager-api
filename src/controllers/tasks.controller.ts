@@ -1,5 +1,5 @@
 import { Elysia } from "elysia";
-import { TasksService } from "./service";
+import { TasksService } from "../services/tasks.service";
 export default function tasksController(tasksService: TasksService) {
   return (app: Elysia) => {
     app.get("/tasks", async ({ set }) => {
@@ -12,10 +12,12 @@ export default function tasksController(tasksService: TasksService) {
         };
       } catch (e) {
         set.status = 500;
+        console.log(e);
+        
         return {
           error: {
-            message: "Server Error",
-            e
+            message: "Server error, a task with the same title might exist",
+            
           },
         };
       }
@@ -37,10 +39,12 @@ export default function tasksController(tasksService: TasksService) {
         };
       } catch (e) {
         set.status = 500;
+        console.log(e);
+        
         return {
           error: {
             message: "Server Error",
-            e
+            
           },
         };
       }  
@@ -53,7 +57,9 @@ export default function tasksController(tasksService: TasksService) {
     );
     app.put("tasks/:id", async ({ set, params: { id }, body }) => {
       try {
-        const task = await tasksService.updateTask(id, body);
+        console.log(id);
+        
+        const task = await tasksService.updateTask(body, id);
 
         if (!task) {
           set.status = 404;
@@ -69,11 +75,14 @@ export default function tasksController(tasksService: TasksService) {
           message: "Task updated !",
           task,
         };
-      } catch (error) {
+      } catch (e) {
         set.status = 500;
+        console.log(e);
+        
         return {
           error: {
             message: "Server error",
+            
           },
         };
       }
@@ -99,10 +108,9 @@ export default function tasksController(tasksService: TasksService) {
 
         set.status = 204;
         return {};
-      } catch (error) {
+      } catch (e) {
         set.status = 500;
-        console.log(error);
-
+        console.log(e);
         return {
           error: {
             message: "Server error",
@@ -134,8 +142,10 @@ export default function tasksController(tasksService: TasksService) {
           message: "Task found!",
           task,
         };
-      } catch (error) {
+      } catch (e) {
         set.status = 500;
+        console.log(e);
+        
         return {
           error: {
             message: "Server error",

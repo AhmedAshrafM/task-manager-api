@@ -1,8 +1,14 @@
-import Task from "./model"
-import { ITask } from "./types"
+import Task from "../models/tasks.model"
+import { isValidStatus } from "../utils/isValidStatus";
+import { Status } from "../utils/tasks.status.enum";
+import { ITask } from "../utils/types"
 export class TasksService{
  async createTask(task: ITask): Promise<ITask> {
     try{
+        const existingTask = await Task.findOne({title: task.title});
+        if(existingTask){
+            throw new Error("Task with same title exists !");
+        }
         return await new Task(task).save();
     }catch(e){
         throw e;
@@ -24,6 +30,9 @@ export class TasksService{
  }
  async updateTask(task: ITask, id: string): Promise<ITask | null>{
     try{
+        if (task.status && !isValidStatus(task.status)) {
+            throw new Error("Invalid Status");
+        }
         return await Task.findByIdAndUpdate(id,task,{new:true});
     }catch(e){
         throw e;
@@ -36,5 +45,6 @@ export class TasksService{
         throw e;
     }
  }
+
     
 }

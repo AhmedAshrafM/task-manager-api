@@ -4,6 +4,6 @@ export interface ITask extends Document{
   uuid?: string;
   title?: string;
   description?: string;
-  status?: boolean;
+  status?: string;
   dueDate?: Date;
 }
