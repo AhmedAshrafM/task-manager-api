@@ -93,7 +93,8 @@ export default function tasksController(tasksService: TasksService) {
       }
     }
     );
-    app.delete("tasks/:id", async ({ set, params: { id } }) => {
+    app
+    .delete("tasks/:id", async ({ set, params: { id } }) => {
       try {
         const task = await tasksService.deleteTask(id);
 

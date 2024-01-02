@@ -1,7 +1,6 @@
+import { ITask } from "../interfaces/tasks.interface";
 import Task from "../models/tasks.model"
 import { isValidStatus } from "../utils/isValidStatus";
-import { Status } from "../utils/tasks.status.enum";
-import { ITask } from "../utils/types"
 export class TasksService{
  async createTask(task: ITask): Promise<ITask> {
     try{

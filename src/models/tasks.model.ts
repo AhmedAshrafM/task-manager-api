@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { ITask } from "../utils/types";
+import { ITask } from "../interfaces/tasks.interface";
 import { Status } from "../utils/tasks.status.enum";
 
 const Task = new Schema<ITask>(

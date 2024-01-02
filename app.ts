@@ -4,6 +4,7 @@ import { swagger } from '@elysiajs/swagger'
 import { logger } from '@grotto/logysia';
 import { rateLimit } from 'elysia-rate-limit'
 import MongoConnection from "./src/db/mongo.connections";
+import { usersController } from "./src/controllers/users.controller";
 
 export default class App{
     public elysia: Elysia
@@ -42,6 +43,7 @@ export default class App{
           }))
           this.elysia.use(rateLimit({ duration: 50000, max: 25, responseMessage: 'Enhance your calm' }))
           this.elysia.use(logger({logIP: true}))
+          this.elysia.use(usersController)
 
     }
     public listen() {
