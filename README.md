@@ -8,6 +8,7 @@ This project is a backend API for a Task Manager application using [Bun](https:/
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Configuration](#configuration)
+- [Swagger](#swagger)
 - [Authentication](#authentication)
 - [Testing](#testing)
 - [Contributing](#contributing)
@@ -61,20 +62,22 @@ The API will be available at `http://localhost:3000`.
 - **`GET /tasks/:id`**: Retrieve a specific task.
 - **`PUT /tasks/:id`**: Update a task.
 - **`DELETE /tasks/:id`**: Delete a task.
+- **`POST /users`**: Create a new user.
+- **`GET /users`**: Get all users.
+- **`GET /users/:id`**: Retrieve a specific user.
+- **`Patch /users/:id`**: Update a user.
+- **`DELETE /users/:id`**: Delete a user.
 
 ## Configuration
 
 - `PORT`: The port on which the server will run.
 - `MONGODB_URI`: MongoDB connection string.
 - `JWT_SECRET`: Secret key for JWT token generation.
+### Swagger
 
-## Authentication
+You can explore and test the API using Swagger documentation.
 
-This API uses JWT authentication. To access protected routes, include the generated JWT token in the request headers:
-
-```bash
-Authorization: Bearer your_token_here
-```
+Swagger UI is available at: [http://localhost:3000/swagger](http://localhost:3000/swagger)
 
 ## Testing
 
